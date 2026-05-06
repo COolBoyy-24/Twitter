@@ -122,7 +122,7 @@ function emitNotification(recipientId, notification) {
 }
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://192.168.23.1:3000", "http://192.168.23.1:3001"],
+  origin: ["http://localhost:3000", "https://twitter-d0dc.onrender.com"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,

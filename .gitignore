@@ -4,6 +4,8 @@ backend/node_modules/
 twiller_clone/node_modules/
 
 # Local environment files
+.md
+.csv
 .env
 .env.local
 backend/.env

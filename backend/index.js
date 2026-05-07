@@ -36,7 +36,7 @@ const io = new Server(httpServer, {
         "http://localhost:3001",
         "http://192.168.23.1:3000",
         "http://192.168.23.1:3001",
-        "https://twitter-puce-rho.vercel.app",
+        "https://twitter-cz-vercel.app",
         process.env.FRONTEND_URL,
         process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
       ].filter(Boolean);

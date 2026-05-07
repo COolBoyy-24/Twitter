@@ -40,7 +40,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     s.on("connect", () => {
-      console.log("✅ Socket connected:", s.id);
+      console.log("✅ Socket connected:" ) //, (s.id);
     });
 
     s.on("disconnect", (reason) => {

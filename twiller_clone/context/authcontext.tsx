@@ -138,6 +138,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (isLoggingInRef.current) return;
       if (firebaseuser?.email) {
         try {
+
+          const isMobile = /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent);
+          if (isMobile) {
+            const now = new Date();
+            const istTime = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
+            const istHour = istTime.getUTCHours();
+            if (istHour < 10 || istHour >= 13) {
+              setIsLoading(false);
+              return;
+            }
+          }
+
+
           const res = await axiosInstance.post("/loggedinuser", {
             email: firebaseuser.email,
           });

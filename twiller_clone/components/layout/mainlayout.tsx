@@ -17,10 +17,11 @@ import { Button } from "../ui/button";
 import { SocketProvider, useSocket } from "@/context/socketcontext";
 import axiosInstance from "@/lib/axiosinstance";
 import { useBrowserNotifications } from "@/hooks/useBrowserNotifications";
+import MobileRestricted from "../ui/MobileRestricted";
 
 import BottomNav from "./bottomnav";
 
-// Inner layout that consumes socket for live notification/message badges
+// Inner layout socket for live notification/message 
 const InnerLayout = ({ children }: any) => {
   const { user } = useAuth();
   const { socket } = useSocket();
@@ -158,6 +159,26 @@ const InnerLayout = ({ children }: any) => {
 
 const Mainlayout = ({ children }: any) => {
   const { user, isLoading } = useAuth();
+  const [mobileBlocked, setMobileBlocked] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const isMobile = /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (isMobile) {
+      const now = new Date();
+      const istTime = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
+      const istHour = istTime.getUTCHours();
+      if (istHour < 10 || istHour >= 13) {
+        setMobileBlocked(true);
+      } else {
+        setMobileBlocked(false);
+      }
+    } else {
+      setMobileBlocked(false);
+    }
+  }, []);
+
+  if (mobileBlocked === null) return null; // 
+  if (mobileBlocked) return <MobileRestricted />;
 
   if (isLoading) {
     return (

@@ -36,7 +36,7 @@ const io = new Server(httpServer, {
         "http://localhost:3001",
         "http://192.168.23.1:3000",
         "http://192.168.23.1:3001",
-        "https://twitter-cz-vercel.app",
+        "https://twitter-eight-liard.vercel.app",
         process.env.FRONTEND_URL,
         process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
       ].filter(Boolean);
@@ -124,8 +124,8 @@ function emitNotification(recipientId, notification) {
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "http://localhost:3001", 
-    "https://twitter-puce-rho.vercel.app",
+    "http://localhost:3001",
+    "https://twitter-eight-liard.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -243,7 +243,6 @@ function parseClientContext(userAgent = "") {
 
 // Global Middleware to enforce Mobile Access Window (10 AM - 1 PM IST)
 app.use((req, res, next) => {
-  // Skip check for root or static files or system-critical routes
   if (
     req.path === "/" || 
     req.path.startsWith("/uploads") || 
@@ -254,6 +253,9 @@ app.use((req, res, next) => {
   }
 
   const ua = req.headers["user-agent"] || "";
+
+  if (!ua || ua.includes("vercel") || ua.includes("bot") || ua.includes("Bot")) return next();
+
   const context = parseClientContext(ua);
   
   if (context.deviceType === "mobile") {

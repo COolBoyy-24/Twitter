@@ -3,7 +3,11 @@ import React, { useEffect, useRef, useState, createContext, useContext } from "r
 import { io, Socket } from "socket.io-client";
 import { useAuth } from "@/context/authcontext";
 
-const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const BACKEND =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  process.env.BACKEND_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://twitter-5lfr.onrender.com";
 
 interface SocketContextValue {
   socket: Socket | null;

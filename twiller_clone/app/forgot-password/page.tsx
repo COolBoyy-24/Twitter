@@ -5,6 +5,12 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  process.env.BACKEND_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://twitter-5lfr.onrender.com";
+
 const ForgotPasswordPage = () => {
     const [identifier, setIdentifier] = useState("");
     const [message, setMessage] = useState("");
@@ -28,7 +34,7 @@ const ForgotPasswordPage = () => {
         setNewPassword("");
 
         try {
-            const response = await axios.post("http://localhost:5000/forgot-password", {
+            const response = await axios.post(`${BACKEND_URL}/forgot-password`, {
                 identifier,
             });
 
@@ -55,7 +61,7 @@ const ForgotPasswordPage = () => {
         setError("");
 
         try {
-            const response = await axios.post("http://localhost:5000/verify-forgot-password-otp", {
+            const response = await axios.post(`${BACKEND_URL}/verify-forgot-password-otp`, {
                 email: otpEmail,
                 otp
             });

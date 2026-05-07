@@ -196,7 +196,11 @@ const TweetComposer = ({ onTweetPosted }: any) => {
             formData.append("email", user?.email || "");
 
             // We use the backend URL for this specific upload
-            const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const backendUrl =
+                process.env.NEXT_PUBLIC_BACKEND_URL ||
+                process.env.BACKEND_URL ||
+                process.env.NEXT_PUBLIC_API_URL ||
+                "https://twitter-5lfr.onrender.com";
             const uploadRes = await axios.post(`${backendUrl}/upload-audio`, formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });

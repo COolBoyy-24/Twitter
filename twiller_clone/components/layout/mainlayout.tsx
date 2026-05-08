@@ -12,7 +12,7 @@ import ExplorePage from "../explorepage";
 import BookmarksPage from "../bookmarkspage";
 import MorePage from "../morepage";
 import TweetComposer from "../tweetcomposer";
-import { Plus } from "lucide-react";
+import { Plus, Search, MoreHorizontal } from "lucide-react";
 import { Button } from "../ui/button";
 import { SocketProvider, useSocket } from "@/context/socketcontext";
 import axiosInstance from "@/lib/axiosinstance";
@@ -119,6 +119,23 @@ const InnerLayout = ({ children }: any) => {
         <div className="hidden xl:flex w-80 flex-col">
           <RightSidebar onNavigate={setCurrentPage} />
         </div>
+      </div>
+
+      <div className="fixed top-3 right-3 z-50 flex items-center gap-2 xl:hidden">
+        <button
+          onClick={() => setCurrentPage("explore")}
+          className="p-2 rounded-full bg-black/80 border border-gray-700 text-gray-300 hover:bg-gray-900 transition-colors"
+          aria-label="Explore"
+        >
+          <Search className="h-5 w-5" />
+        </button>
+        <button
+          onClick={() => setCurrentPage("more")}
+          className="p-2 rounded-full bg-black/80 border border-gray-700 text-gray-300 hover:bg-gray-900 transition-colors"
+          aria-label="More"
+        >
+          <MoreHorizontal className="h-5 w-5" />
+        </button>
       </div>
 
       <BottomNav 

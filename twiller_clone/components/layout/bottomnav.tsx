@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Home, Search, Bell, Mail, Plus } from "lucide-react";
+import { Home, Bell, Mail, Plus, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/context/translationcontext";
 
@@ -24,15 +24,15 @@ const BottomNav = ({
 
   const navItems = [
     { icon: Home, page: "home", label: t("home") },
-    { icon: Search, page: "explore", label: t("explore") },
-    { icon: Bell, page: "notifications", label: t("notifications"), badge: notifCount },
     { icon: Mail, page: "messages", label: t("messages"), badge: msgUnread },
+    { icon: Bell, page: "notifications", label: t("notifications"), badge: notifCount },
+    { icon: User, page: "profile", label: t("profile") },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800 flex items-center justify-center gap-8 py-3 px-4 z-50 xl:hidden">
+    <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800 flex items-center justify-center gap-4 py-3 px-3 z-50 xl:hidden">
       {/* Left Navigation Items */}
-      <div className="flex items-center justify-center gap-6 flex-1">
+      <div className="flex items-center justify-center gap-4 flex-1">
         {navItems.slice(0, 2).map((item) => {
           const isActive = currentPage === item.page;
           return (
@@ -60,8 +60,8 @@ const BottomNav = ({
       </Button>
 
       {/* Right Navigation Items */}
-      <div className="flex items-center justify-center gap-6 flex-1">
-        {navItems.slice(2, 4).map((item) => {
+      <div className="flex items-center justify-center gap-4 flex-1">
+        {navItems.slice(2).map((item) => {
           const isActive = currentPage === item.page;
           return (
             <button
